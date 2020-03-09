@@ -1,8 +1,11 @@
-compile: ItemType.o Main.o CircularLinkedList.o main.out
-	g++ -o Main Main.o ItemType.o 
+compile: Main.o ItemType.o CircularLinkedList.o
+	g++ -o Main.out ItemType.o CircularLinkedList.o Main.o
 
-main.out: Main.cpp  
+Main.out: Main.cpp  
 	g++ -c Main.cpp
+
+Main.o: Main.cpp
+	Main.cpp
 
 ItemType.o: ItemType.cpp ItemType.h
 	g++ -c ItemType.cpp
@@ -10,8 +13,8 @@ ItemType.o: ItemType.cpp ItemType.h
 CircularLinkedList.o: CircularLinkedList.cpp CircularLinkedList.h
 	g++ -c CircularLinkedList.cpp
 
-run: main
-	./main input.txt
+run: Main.out
+	./Main.out input.txt
 
 clean:
 	rm *.out

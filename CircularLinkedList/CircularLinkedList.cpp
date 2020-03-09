@@ -3,6 +3,9 @@
 #include <iostream>
 using namespace std;
 CircularLinkedList:: CircularLinkedList(){
+  length=0;
+  listData= new NodeType;
+  location=listData->next;
 }
 CircularLinkedList::~CircularLinkedList(){
 }

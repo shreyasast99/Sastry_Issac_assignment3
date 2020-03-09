@@ -19,6 +19,9 @@ public:
   int print();
 private:
   int length;
-  NodeType *head;
+  NodeType *listData; //listData->next is the first element
+  NodeType *location; //same as current
+  NodeType *predLoc; //the node before location
+  
 };
 #endif
