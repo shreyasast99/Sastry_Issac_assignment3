@@ -1,0 +1,10 @@
+	  list.insertItem(item);
+	  fs >> input;    
+	}
+    }
+  
+ else{
+   cout << "Failed to open the input file" << std::endl;
+   return 0;
+ }
+}

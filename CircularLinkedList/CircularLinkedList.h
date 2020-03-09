@@ -13,6 +13,7 @@ class CircularLinkedList{
 public:
   CircularLinkedList();
   ~CircularLinkedList();
+  void FindItem(NodeType *listData, ItemType &item,NodeType *&location, NodeType *&predLoc, bool& found);
   void insertItem(ItemType &item);
   void deleteItem(ItemType &item);
   int lengthIs() const;
