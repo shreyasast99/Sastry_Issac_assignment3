@@ -26,6 +26,6 @@ int ItemType::getValue() const{
 }
 //intiializes the value into number
 void ItemType::initialize(int number){
-    value=num;
+    value=number;
 }
  

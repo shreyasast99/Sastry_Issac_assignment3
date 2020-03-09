@@ -1,8 +1,7 @@
 #ifndef ITEMTYPE_H
 #define ITEMTYPE_H
 #include <iostream>
-const int MAX_ITEM=5 ;
-enum Comparison{LESS,EQUAL,GREATER};
+enum Comparison{LESS, EQUAL, GREATER};
 class ItemType{
  public:
   ItemType();

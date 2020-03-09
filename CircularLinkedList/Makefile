@@ -1,0 +1,18 @@
+compile: ItemType.o Main.o CircularLinkedList.o main.out
+	g++ -o Main Main.o ItemType.o 
+
+main.out: Main.cpp  
+	g++ -c Main.cpp
+
+ItemType.o: ItemType.cpp ItemType.h
+	g++ -c ItemType.cpp
+
+CircularLinkedList.o: CircularLinkedList.cpp CircularLinkedList.h
+	g++ -c CircularLinkedList.cpp
+
+run: main
+	./main input.txt
+
+clean:
+	rm *.out
+	rm *.o
