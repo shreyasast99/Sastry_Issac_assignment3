@@ -18,11 +18,16 @@ public:
   void deleteItem(ItemType &item);
   int lengthIs() const;
   int print();
+    int searchItem(ItemType item);
 private:
-  int length;
-  NodeType *listData; //listData->next is the first element
-  NodeType *location; //same as current
-  NodeType *predLoc; //the node before location
-  
+    int length;
+    NodeType *listData; //listData->next is the first element
+    NodeType *location; //same as current
+    NodeType *predLoc; //the node before location
+    NodeType *head;
+    NodeType *currentPos;
+    NodeType *last;
+    NodeType *postLoc;
+    //NodeType *predLoc;
 };
 #endif
