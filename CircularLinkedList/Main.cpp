@@ -29,6 +29,29 @@ int main(int argc, char *argv[]){
 using namespace std;
 int main(int argc, char *argv[]){
     CircularLinkedList list;
+    
+    ItemType item1;
+    item1.initialize(2);
+    list.insertItem(item1);
+    ItemType item2;
+    item2.initialize(4);
+    list.insertItem(item2);
+    ItemType item3;
+    item3.initialize(3);
+    list.insertItem(item3);
+    ItemType item4;
+    item4.initialize(1);
+    list.insertItem(item4);
+    list.print();
+    cout<<"Deleting 1"<<endl;
+    list.deleteItem(item4);
+    list.print();
+    cout<<"Deleting 4"<<endl;
+    list.deleteItem(item2);
+    list.print();
+    return 0;
+/*
+    CircularLinkedList list;
     string userInput="";
     //SortedLinkedList list;
     ItemType item;
@@ -92,5 +115,6 @@ while(userInput.compare("q")!=0){
         }
         cout<<endl;
     }
+*/
 }
 

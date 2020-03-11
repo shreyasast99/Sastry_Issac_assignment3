@@ -17,7 +17,7 @@ public:
   void insertItem(ItemType &item);
   void deleteItem(ItemType &item);
   int lengthIs() const;
-  int print();
+  void print();
     int searchItem(ItemType item);
 private:
     int length;
