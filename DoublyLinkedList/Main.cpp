@@ -33,20 +33,34 @@ int main(int argc, char *argv[]){
     ItemType item1;
     item1.initialize(2);
     list.insertItem(item1);
+    //cout<<"Added Item 1 (2)\n"<<endl;
+    
     ItemType item2;
-    item2.initialize(4);
+    item2.initialize(1);
     list.insertItem(item2);
+    //cout<<"Added Item 2 (1)\n"<<endl;
+    
+    
     ItemType item3;
     item3.initialize(3);
     list.insertItem(item3);
-    ItemType item4;
-    item4.initialize(1);
+    //cout<<"Added Item 3 (3)\n"<<endl;
+    
+      ItemType item4;
+    item4.initialize(4);
     list.insertItem(item4);
+    //cout<<"Added Item 4 (4)\n"<<endl;
+    /*
     list.print();
-    cout<<"Deleting 1"<<endl;
-    list.deleteItem(item4);
-    list.print();
+    cout<<"Print Reverse: "<<endl;
+    list.printReverse();
+    */
     cout<<"Deleting 4"<<endl;
+    list.deleteItem(item4);
+    //list.print();
+    list.print();
+    
+    cout<<"\nDeleting 1"<<endl;
     list.deleteItem(item2);
     list.print();
     return 0;

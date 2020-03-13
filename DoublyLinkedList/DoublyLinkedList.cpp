@@ -5,38 +5,129 @@ using namespace std;
 
 DoublyLinkedList::DoublyLinkedList(){
   length=0;
-  listData= new NodeType;
-  location=listData->next;
-  last=new NodeType;
+  head=new NodeType;
+  head=currentPos;
+  //location=listData->next;
+  //last=new NodeType;
 }
 DoublyLinkedList::~DoublyLinkedList(){
 }
 void DoublyLinkedList::insertItem(ItemType &item){
-/*
-    NodeType *newNode;
-  bool found;
-  newNode = new NodeType;
-  newNode->item = item;
-  if(listData->item.compareTo(item)==LESS){
-    //    FindItem(listData, item, location, predLoc, found);
-    newNode->next=predLoc->next;
-    predLoc->next= newNode;
+  currentPos=head;
+  NodeType *insert=new NodeType;
+  insert->data=item;
 
-    //if list is a last node, then we reassign it to listData
-    if(listData->item.compareTo(item)==LESS){
-      listData= newNode;
-    }
+
+  //checking if there is duplicates
+  if(searchItem(item)!=-1){
+      cout<<"Sorry. You cannot insert the duplicate item"<<endl;
   }
-  //inserting into an empty list.
-  else
-    {
-      listData= newNode;
-      newNode->next=newNode;
-    }
-  length++;
-*/
+  else{
+      //if the list is not empty
+      while(currentPos!=NULL){
+          //if inserting to the beginning if it's less than head
+          if(head->data.compareTo(insert->data)==GREATER){
+	   
+	    insert->next=head;
+	    head=insert;
+	    predLoc=currentPos->next;
+          }
+          else{//used for middle/end insertion(if head<insert)
+              currentPos=head;
+              while(currentPos->next!=NULL&&currentPos->next->data.compareTo(insert->data)==LESS){
+                  currentPos=currentPos->next;
+              }
+              //end
+              if(currentPos->next==NULL){
+                  currentPos->next=insert;
+                  break;
+              }
 
-    currentPos=head;
+              //middle
+              if(currentPos->next->data.compareTo(insert->data)==GREATER){
+              predLoc=currentPos;
+              postLoc=currentPos->next;
+
+	      predLoc->next=insert;
+              insert->next=postLoc;
+
+	      /*
+	      insert->back=predLoc;
+	      insert->next=postLoc;
+	      predLoc->next=insert;
+	      postLoc->back=insert;
+	      */
+	      break;
+              }
+
+          }
+          currentPos=predLoc;
+      }
+
+      //if the list is empty
+      if(lengthIs()==0){
+	//cout<<"went inside"<<endl;
+          //cout<<"List was empty before"<<endl;
+          head=insert;
+	  //tail=insert;
+	  //insert->back=NULL;
+	  //insert->next=NULL;
+          //current=head;
+      }
+      //head->next=location;
+
+      length=length+1;
+  }
+  /*
+  currentPos=head;
+  for(int i=0;i<lengthIs();i++){
+    if(i==0){
+      if(lengthIs()==1){
+	currentPos->back=NULL;
+	cout<<" "<<currentPos->data.getValue()<<" ";
+	break;
+      }
+      else{
+	currentPos->next->back=currentPos;
+      }
+      cout<<"first element"<<endl;
+      currentPos->back=NULL;
+    }
+    else if(i==lengthIs()-1){
+      cout<<"else if (i==lengthIs()-1)"<<endl;
+      tail=currentPos;
+      cout<<"Tail is: "<<tail->data.getValue()<<endl;
+      if(lengthIs()==2){
+      }
+      //currentPos->next=NULL;
+    }
+    else{
+      cout<<"middle (not beginning or end)"<<endl;
+      currentPos->next->back=currentPos;
+      //cout<<"back: "<<currentPos->next->back<<endl;
+    }
+    cout<<" "<<currentPos->data.getValue()<<" ";
+    currentPos=currentPos->next;
+  }
+  */
+
+  //////////////////////////////////////////////////////
+  /* 
+  predLoc=head;
+  currentPos=predLoc->next;
+
+  //linking the back item
+  while(currentPos!=NULL){
+    currentPos->back=predLoc;
+    predLoc=currentPos;
+    currentPos=currentPos->next;
+  }
+  */
+//  delete insert;
+
+  
+  /*
+  currentPos=head;
   NodeType *insert=new NodeType;
   insert->data=item;
   //last=new NodeType;
@@ -50,32 +141,33 @@ void DoublyLinkedList::insertItem(ItemType &item){
       if(length==0){
           //cout<<"List was empty before"<<endl;
           head=insert;
-          last=insert;
+          tail=insert;
           //last->next=head;
           //current=head;
       }
 
       if(length!=0){
       //if the list is not empty
-          while(currentPos->next!=head){
+          while(currentPos!=NULL){
               //if inserting to the beginning if it's less than head
               if(head->data.compareTo(insert->data)==GREATER){
                   insert->next=head;
+		  head->back=insert;
                   head=insert;
                   predLoc=currentPos->next;
-                  last->next=head;
               }
+	      
               else{//used for middle/end insertion(if head<insert)
                   currentPos=head;
-                  while(currentPos!=last&&currentPos->next->data.compareTo(insert->data)==LESS){
+                  while(currentPos->next!=NULL&&currentPos->next->data.compareTo(insert->data)==LESS){
                       currentPos=currentPos->next;
                   }
                   //end
-                  if(currentPos==last&&(currentPos->data.compareTo(insert->data)==LESS)){
+                  if(currentPos->next==NULL){
                       currentPos->next=insert;
-                      last=insert;
-                      last->next=head;
-                      //currentPos->next should equal the last node for CIRCULAR LINKED LIST
+		      insert->back=currentPos;
+                      tail=insert;
+                      currentPos->next should equal the last node for CIRCULAR LINKED LIST
                       break;
                   }
 
@@ -84,11 +176,15 @@ void DoublyLinkedList::insertItem(ItemType &item){
                       predLoc=currentPos;
                       postLoc=currentPos->next;
                       predLoc->next=insert;
+		      insert->back=predLoc;
+		      
                       insert->next=postLoc;
+		      postLoc->back=insert;
                       break;
                   }
 
               }
+	      
               currentPos=predLoc;
           }
       }
@@ -101,7 +197,8 @@ void DoublyLinkedList::insertItem(ItemType &item){
   }
   currentPos=head;
 //  delete insert;
-
+*/
+  
 }
 int DoublyLinkedList::searchItem(ItemType item){
   currentPos=head;
@@ -123,67 +220,104 @@ int DoublyLinkedList::searchItem(ItemType item){
 }
 
 void DoublyLinkedList::deleteItem(ItemType &item){
-//if it is an empty list
-    if(length==0){
-        cout<<"You cannot delete from an empty list"<<endl;
+  currentPos=head;
+  //if it is an empty list
+    if(lengthIs()==0){
+      cout<<""<<endl;
     }
     else if(searchItem(item)==-1){
-        cout<<"Item not found"<<endl;
+      cout<<"Item not found"<<endl;
     }
     //for everything else... regular deleting
     else{
-        //if deleting from the middle
-        if((searchItem(item)!=0)&&(searchItem(item)!=length-1)){
-            currentPos=head;
-            predLoc=currentPos;
-            int count=searchItem(item); //saves the index in where the item is found
-            //takes the item for the predLoc
-            for(int i=0;i<count-1;i++){
-                predLoc=predLoc->next;
-            }
-            //taking value we want to remove (current)
-            currentPos=predLoc->next;
-            //taking the post value so we can connect
-            postLoc=currentPos->next;
-            predLoc->next=postLoc; //bascially skipping the current pos because we are deleting that
-            delete currentPos;//I ADDED THIS NOW
+      //if deleting from the middle
+      if((searchItem(item)!=0)&&(searchItem(item)!=lengthIs()-1)){
+      currentPos=head;
+        predLoc=currentPos;
+        int count=searchItem(item); //saves the index in where the item is found
+        //takes the item for the predLoc
+        for(int i=0;i<count-1;i++){
+            predLoc=predLoc->next;
         }
-        //if it deleting from beginning
-        if(searchItem(item)==0){
-            NodeType* temp=head;
-            head=head->next; //setting the actual value into the next value
-            last->next=head;
-            delete temp;
-        }
+        //taking value we want to remove (current)
+        currentPos=predLoc->next;
+        //taking the post value so we can connect
+        postLoc=currentPos->next;
+        predLoc->next=postLoc; //bascially skipping the current pos because we are deleting that
+        delete currentPos;//I ADDED THIS NOW
+    }
+    //if it deleting from beginning
+    if(searchItem(item)==0){
+      NodeType* temp=head;
+        head=head->next; //setting the actual value into the next value
+        delete temp;
+    }
     //if it is deleting the end
-        if(searchItem(item)==length-1){
-            currentPos=head;
-            for(int i=0;i<searchItem(item);i++){
-                currentPos=currentPos->next;
-            }
-
-            //delete currentPos;//NEW
-            currentPos->next->next=head; //setting the last value to NULL because item is deleted
-            last=currentPos->next;
+    if(searchItem(item)==lengthIs()-1){
+      currentPos=head;
+      for(int i=0;i<searchItem(item);i++){
+	  currentPos=currentPos->next;
         }
-        length--; //size decreases if we delete an item
+        //delete currentPos;//NEW
+        currentPos=NULL; //setting the last value to NULL because item is deleted
+    }
+    length--; //size decreases if we delete an item
     }
     currentPos=head;
-    if(length>1){
-        cout<<"This is last->next: "<<last->next->data.getValue()<<endl;
-    }
-
 }
 int DoublyLinkedList::lengthIs() const{
     return length;
 }
 void DoublyLinkedList::print(){
+currentPos=head;
+  for(int i=0;i<lengthIs();i++){
+    if(i==0){
+      if(lengthIs()==1){
+	currentPos->back=NULL;
+	//cout<<" "<<currentPos->data.getValue()<<" ";
+	break;
+      }
+      else{
+	currentPos->next->back=currentPos;
+      }
+      //cout<<"first element"<<endl;
+      currentPos->back=NULL;
+    }
+    else if(i==lengthIs()-1){
+      //cout<<"else if (i==lengthIs()-1)"<<endl;
+      tail=currentPos;
+      //cout<<"Tail is: "<<tail->data.getValue()<<endl;
+      if(lengthIs()==2){
+      }
+      tail->next=NULL;
+      //currentPos->next=NULL;
+    }
+    else{
+      //cout<<"middle (not beginning or end)"<<endl;
+      currentPos->next->back=currentPos;
+      //cout<<"back: "<<currentPos->next->back<<endl;
+    }
+    //cout<<" "<<currentPos->data.getValue()<<" ";
+    currentPos=currentPos->next;
+  }
+  
+  //ORIGINAL PRINT BELOW!!!!!!!!!!!!!!!!!!!!!
+  currentPos=head;
   for(int i=0;i<lengthIs();i++){
     cout<<currentPos->data.getValue()<<" ";
+    /*cout<<"\nCurrent Pos: "<<currentPos->data.getValue()<<endl;
+    if(i!=0){
+      cout<<"Back: "<<currentPos->back->data.getValue()<<endl;
+    }
+    */
     currentPos=currentPos->next;
   }
 }
 void DoublyLinkedList::printReverse(){
-
+  currentPos=tail;
+  for(int i=0;i<lengthIs();i++){
+    cout<<" "<<currentPos->data.getValue()<<" ";
+    currentPos=currentPos->back;
+  }
 }
 
