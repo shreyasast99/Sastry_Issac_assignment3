@@ -78,38 +78,38 @@ void DoublyLinkedList::insertItem(ItemType &item){
 
       length=length+1;
   }
-  /*
+  
   currentPos=head;
   for(int i=0;i<lengthIs();i++){
     if(i==0){
       if(lengthIs()==1){
 	currentPos->back=NULL;
-	cout<<" "<<currentPos->data.getValue()<<" ";
+	//cout<<" "<<currentPos->data.getValue()<<" ";
 	break;
       }
       else{
 	currentPos->next->back=currentPos;
       }
-      cout<<"first element"<<endl;
+      //cout<<"first element"<<endl;
       currentPos->back=NULL;
     }
     else if(i==lengthIs()-1){
-      cout<<"else if (i==lengthIs()-1)"<<endl;
+      //cout<<"else if (i==lengthIs()-1)"<<endl;
       tail=currentPos;
-      cout<<"Tail is: "<<tail->data.getValue()<<endl;
+      //cout<<"Tail is: "<<tail->data.getValue()<<endl;
       if(lengthIs()==2){
       }
       //currentPos->next=NULL;
     }
     else{
-      cout<<"middle (not beginning or end)"<<endl;
+      //cout<<"middle (not beginning or end)"<<endl;
       currentPos->next->back=currentPos;
       //cout<<"back: "<<currentPos->next->back<<endl;
     }
-    cout<<" "<<currentPos->data.getValue()<<" ";
+    //cout<<" "<<currentPos->data.getValue()<<" ";
     currentPos=currentPos->next;
   }
-  */
+  
 
   //////////////////////////////////////////////////////
   /* 
@@ -269,38 +269,6 @@ int DoublyLinkedList::lengthIs() const{
     return length;
 }
 void DoublyLinkedList::print(){
-currentPos=head;
-  for(int i=0;i<lengthIs();i++){
-    if(i==0){
-      if(lengthIs()==1){
-	currentPos->back=NULL;
-	//cout<<" "<<currentPos->data.getValue()<<" ";
-	break;
-      }
-      else{
-	currentPos->next->back=currentPos;
-      }
-      //cout<<"first element"<<endl;
-      currentPos->back=NULL;
-    }
-    else if(i==lengthIs()-1){
-      //cout<<"else if (i==lengthIs()-1)"<<endl;
-      tail=currentPos;
-      //cout<<"Tail is: "<<tail->data.getValue()<<endl;
-      if(lengthIs()==2){
-      }
-      tail->next=NULL;
-      //currentPos->next=NULL;
-    }
-    else{
-      //cout<<"middle (not beginning or end)"<<endl;
-      currentPos->next->back=currentPos;
-      //cout<<"back: "<<currentPos->next->back<<endl;
-    }
-    //cout<<" "<<currentPos->data.getValue()<<" ";
-    currentPos=currentPos->next;
-  }
-  
   //ORIGINAL PRINT BELOW!!!!!!!!!!!!!!!!!!!!!
   currentPos=head;
   for(int i=0;i<lengthIs();i++){
@@ -316,7 +284,7 @@ currentPos=head;
 void DoublyLinkedList::printReverse(){
   currentPos=tail;
   for(int i=0;i<lengthIs();i++){
-    cout<<" "<<currentPos->data.getValue()<<" ";
+    cout<<currentPos->data.getValue()<<" ";
     currentPos=currentPos->back;
   }
 }

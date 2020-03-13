@@ -49,20 +49,26 @@ int main(int argc, char *argv[]){
       ItemType item4;
     item4.initialize(4);
     list.insertItem(item4);
-    //cout<<"Added Item 4 (4)\n"<<endl;
-    /*
+    //cout<<"Printing List After Insertion"<<endl;
     list.print();
-    cout<<"Print Reverse: "<<endl;
-    list.printReverse();
-    */
+    //cout<<"Added Item 4 (4)\n"<<endl;
+    
+    //list.print();
+    //cout<<"Print Reverse: "<<endl;
+    //list.printReverse();
+    /*
     cout<<"Deleting 4"<<endl;
     list.deleteItem(item4);
     //list.print();
-    list.print();
-    
+    //list.print();
+
     cout<<"\nDeleting 1"<<endl;
     list.deleteItem(item2);
     list.print();
+    */
+    cout<<"Print Reverse: "<<endl;
+    list.printReverse();
+   
     return 0;
 /*
     CircularLinkedList list;
