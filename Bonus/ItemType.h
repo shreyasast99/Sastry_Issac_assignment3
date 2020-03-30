@@ -3,7 +3,6 @@
 #include <iostream>
 const int MAX_ITEM=5 ;
 enum Comparison{LESS,EQUAL,GREATER};
-//template<class T>
 class ItemType{
  public:
   ItemType();

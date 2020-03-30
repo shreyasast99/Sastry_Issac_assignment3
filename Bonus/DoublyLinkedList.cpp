@@ -12,7 +12,7 @@ DoublyLinkedList<ItemType>::DoublyLinkedList(){
 
   length=0;
 
-  head=new NodeType;
+  head=new NodeType<ItemType>;
 
   head=currentPos;
 
@@ -21,16 +21,18 @@ DoublyLinkedList<ItemType>::DoublyLinkedList(){
   //last=new NodeType;
 
 }
-//template<class ItemType>
-DoublyLinkedList::~DoublyLinkedList(){
+
+template<class ItemType>
+DoublyLinkedList<ItemType>::~DoublyLinkedList(){
 
 }
+
 template<class ItemType>
-void DoublyLinkedList<ItemType>::insertItem(ItemType item){
+void DoublyLinkedList<ItemType>::insertItem(ItemType &item){
 
   currentPos=head;
 
-  NodeType *insert=new NodeType;
+  NodeType<ItemType> *insert=new NodeType<ItemType>;
 
   insert->data=item;
 
@@ -70,7 +72,7 @@ void DoublyLinkedList<ItemType>::insertItem(ItemType item){
 
               currentPos=head;
 
-              while(currentPos->next!=NULL&&currentPos->next->data<insert->data){
+              while((currentPos->next!=NULL)&&(currentPos->next->data<insert->data)){
 
                   currentPos=currentPos->next;
 
@@ -401,6 +403,7 @@ void DoublyLinkedList<ItemType>::insertItem(ItemType item){
   
 
 }
+
 template<class ItemType>
 int DoublyLinkedList<ItemType>::searchItem(ItemType item){
 
@@ -466,10 +469,10 @@ void DoublyLinkedList<ItemType>::deleteItem(ItemType &item){
 
       if((searchItem(item)!=0)&&(searchItem(item)!=lengthIs()-1)){
 
-          NodeType* temp;
-
-          currentPos=head;
-
+	NodeType<ItemType>* temp;
+	
+	currentPos=head;
+	
         predLoc=currentPos;
 
         int count=searchItem(item); //saves the index in where the item is found
@@ -504,7 +507,7 @@ void DoublyLinkedList<ItemType>::deleteItem(ItemType &item){
 
     if(searchItem(item)==0){
 
-      NodeType* temp=head;
+      NodeType<ItemType>* temp=head;
 
         head=head->next; //setting the actual value into the next value
 
@@ -537,12 +540,14 @@ void DoublyLinkedList<ItemType>::deleteItem(ItemType &item){
     currentPos=head;
 
 }
+
 template<class ItemType>
 int DoublyLinkedList<ItemType>::lengthIs() const{
 
     return length;
 
 }
+
 template<class ItemType>
 void DoublyLinkedList<ItemType>::print(){
 
@@ -552,7 +557,7 @@ void DoublyLinkedList<ItemType>::print(){
 
   for(int i=0;i<lengthIs();i++){
 
-    cout<<currentPos->data.getValue()<<" ";
+    cout<<currentPos->data<<" ";
 
     /*cout<<"\nCurrent Pos: "<<currentPos->data.getValue()<<endl;
 
@@ -569,6 +574,7 @@ void DoublyLinkedList<ItemType>::print(){
   }
 
 }
+
 template<class ItemType>
 void DoublyLinkedList<ItemType>::printReverse(){
 
@@ -576,7 +582,7 @@ void DoublyLinkedList<ItemType>::printReverse(){
 
   for(int i=0;i<lengthIs();i++){
 
-    cout<<currentPos->data.getValue()<<" ";
+    cout<<currentPos->data<<" ";
 
     currentPos=currentPos->back;
 

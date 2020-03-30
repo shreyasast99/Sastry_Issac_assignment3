@@ -8,26 +8,33 @@ using namespace std;
 
 int main(int argc, char *argv[]){
 
-    DoublyLinkedList<int> list;
+  DoublyLinkedList<int> listInt;
+  DoublyLinkedList<string> listString;
+  DoublyLinkedList<float> listFloat;
+  
 
-    string userInput="";
+  string userInput="";
+  
+  int itemInt;
+  string itemString;
+  float itemFloat;
 
-    ItemType item;
+  int inputInt;//input
+  string inputString;
+  float inputFloat;
 
-    int input;//input 
+  int number=0;//nums to add
+  /*
+  std::fstream fs;
 
-    int number=0;//nums to add
-
-    std::fstream fs;
-
-    fs.open(argv[1], std::fstream::in);
-
-    if (fs.is_open()){
-
-//        cout<<"gf"<<endl;
-
-        fs >> input;
-
+  fs.open(argv[1], std::fstream::in);
+  
+  if (fs.is_open()){
+    
+    //        cout<<"gf"<<endl;
+    
+    fs >> input;
+    
         while (!fs.eof()){
 
             item.initialize(input);
@@ -47,47 +54,47 @@ int main(int argc, char *argv[]){
         return 0;
 
     }
-
+*/
 //    list.print();
 
 
-
-    cout<<"insert (i), delete (d), length(l), print (p), quit (q)"<<endl;
-
-//    cout<<"Enter a command: ";
-
-//    cin>>userInput;
-
+  cout<< "\nEnter list type (i- int, f - float, s- std:string):";
+  cin>>userInput;
+  
+  //stores int values
+  if(userInput.compare("i")){
+    std::fstream fs
+      fs.open(argv[1], std::fstream::in);
+    if (fs.is_open()){
+      fs >> inputInt;
+      while (!fs.eof()){
+	listInt.insertItem(itemInt);
+	fs >> inputInt;
+      }
+    }
+    else{
+      std::cout << "Failed to open the input file" << std::endl;
+      return 0;
+    }
+  }
+  
+  cout<<"insert (i), delete (d), length(l), print (p), quit (q)"<<endl;
     while(userInput.compare("q")!=0){
-
         cout<<"\nEnter a command: ";
-
         cin>>userInput;
-
-
-
-//        cout<<"userInput: "<<userInput<<endl;
-
         if((userInput.compare("p")!=0)&&(userInput.compare("r")!=0)&&(userInput.compare("s")!=0)&&(userInput.compare("n")!=0)){
 
             //          cout<<"Hi"<<endl;
 
             list.print(); //prints the list
-
             cout<<endl;
-
         }
 
         ItemType temp;
-
         //insert value
-
         if(userInput.compare("i")==0){
-
             cout<<"Number to insert: ";
-
             cin>>number;
-
             temp.initialize(number);
 
             
