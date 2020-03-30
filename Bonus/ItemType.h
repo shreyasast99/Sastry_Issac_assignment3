@@ -3,7 +3,7 @@
 #include <iostream>
 const int MAX_ITEM=5 ;
 enum Comparison{LESS,EQUAL,GREATER};
-template<class T>
+//template<class T>
 class ItemType{
  public:
   ItemType();
@@ -12,6 +12,6 @@ class ItemType{
   Comparison compareTo(ItemType item);
   int getValue() const; //returns the value instance variable
  private:
-  T value;
+  int value;
 };
 #endif
